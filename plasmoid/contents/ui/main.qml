@@ -9,6 +9,7 @@ import org.kde.plasma.components as PlasmaComponents
 import org.kde.plasma.plasmoid 
 import org.kde.plasma.workspace.dbus as DBus
 
+
 PlasmoidItem {
     id: root
     Layout.minimumWidth: placeLabel.implicitWidth
@@ -22,17 +23,26 @@ PlasmoidItem {
             text: location
             width: implicitWidth
         }
-    Timer {
-        interval: (1000*15)
-        onTriggered: refreshData()
-        running:true
-        triggeredOnStart:true
-        repeat:true
+
+    DBus.SignalWatcher {
+        busType: DBus.BusType.Session
+        service: "life.vern.traccar"
+        path: "/device_positions"
+        iface: "life.vern.traccar"
+        function dbusposition_update(id,state) {
+            console.log(id,state,plasmoid.configuration.device_id)
+            if (id == plasmoid.configuration.device_id) {
+                location = state
+            }
+        }
+    }
+
+    Component.onCompleted: {
+        refreshData()
     }
 
     function refreshData(){
         dbus_call()
-    
     }
     
 
@@ -51,7 +61,6 @@ const pendingReply = DBus.SessionBus.asyncCall({
     })
     pendingReply.finished.connect(() => {
         location = pendingReply.value
-        console.log(location)
       pendingReply.destroy()
     })}
     
