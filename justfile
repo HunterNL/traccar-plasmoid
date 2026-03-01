@@ -20,7 +20,7 @@ test-real:
 # Test in `plasmoidviewer`
 [group('Test')]
 test-viewer:
-	plasmoidviewer -a plasma-traccar -l bottomedge -f horizontal
+	QT_LOGGING_RULES="qml.debug=true" plasmoidviewer -a plasma-traccar -l bottomedge -f horizontal
 
 # Test in `plasmawindowed`
 [group('Test')]
