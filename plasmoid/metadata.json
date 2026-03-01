@@ -1,0 +1,23 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "zyph@vern.life",
+                "Name": "Zypheran "
+            }
+        ],
+        "BugReportUrl": "https://github.com/HunterNL/traccar-plasmoid/issues",
+        "Category": "Mapping",
+        "Description": "Show the location of a Traccar device",
+        "EnabledByDefault": true,
+        "FormFactors": [
+            "desktop"
+        ],
+        "Icon": "user-desktop",
+        "Id": "life.vern.traccar-plasmoid",
+        "Name": "Traccar",
+        "Website": "https://kde.org/plasma-desktop"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
+}
